@@ -1,0 +1,19 @@
+version: '1'
+
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    ports:
+      - "8000:8000"
+
+  airflow:
+    image: puckel/docker-airflow
+    environment:
+      - LOAD_EX=y
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/usr/local/airflow/dags
+
